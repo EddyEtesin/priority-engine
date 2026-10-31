@@ -1,0 +1,31 @@
+
+version: 2
+
+sources:
+  - name: raw
+    description: Raw support-ticket data loaded by the Python ingestion pipeline.
+
+    schema: raw
+
+    tables:
+      - name: support_tickets
+        description: One record per synthetic support ticket.
+
+        columns:
+          - name: ticket_id
+            description: Unique support-ticket identifier.
+            data_tests:
+              - unique
+              - not_null
+
+          - name: customer_id
+            description: Synthetic customer identifier.
+
+          - name: severity
+            description: Original ticket severity.
+
+          - name: status
+            description: Current ticket status.
+
+      - name: ingestion_log
+        description: History of Python ingestion runs.

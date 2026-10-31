@@ -1,0 +1,49 @@
+
+version: 2
+
+models:
+  - name: stg_support_tickets
+    description: >
+      Cleaned and standardised support tickets from the raw ingestion layer.
+
+    columns:
+      - name: ticket_id
+        description: Unique ticket identifier.
+        data_tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        data_tests:
+          - not_null
+
+      - name: severity
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - critical
+                  - high
+                  - medium
+                  - low
+
+      - name: status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - open
+                  - in_progress
+                  - pending_customer
+                  - resolved
+                  - closed
+
+      - name: created_at
+        data_tests:
+          - not_null
+
+      - name: reopened_count
+        data_tests:
+          - not_null

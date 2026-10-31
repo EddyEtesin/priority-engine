@@ -1,0 +1,9 @@
+priority_engine:
+  target: dev
+
+  outputs:
+    dev:
+      type: duckdb
+      path: data/warehouse/priority_engine.duckdb
+      schema: analytics
+      threads: 4

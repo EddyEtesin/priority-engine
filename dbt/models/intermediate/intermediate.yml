@@ -1,0 +1,58 @@
+
+version: 2
+
+models:
+  - name: int_ticket_priority_scores
+    description: >
+      Calculates explainable ticket priority scores using severity,
+      customer impact, customer tier and reopening history.
+
+    columns:
+      - name: ticket_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: priority_score
+        data_tests:
+          - not_null
+
+      - name: priority_band
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['P1', 'P2', 'P3', 'P4']
+
+  - name: int_ticket_sla
+    description: >
+      Calculates first-response and resolution deadlines
+      and evaluates SLA status at the dataset snapshot time.
+
+    columns:
+      - name: ticket_id
+        data_tests:
+          - unique
+          - not_null
+
+      - name: first_response_sla_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - met
+                  - breached
+                  - at_risk
+                  - on_track
+
+      - name: resolution_sla_status
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - met
+                  - breached
+                  - at_risk
+                  - on_track
